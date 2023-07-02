@@ -1,8 +1,9 @@
 package com.poliakova.jdbc;
 
 import com.poliakova.jdbc.util.ConnectionManager;
-import org.postgresql.Driver;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -12,6 +13,30 @@ import java.sql.Statement;
  */
 public class JdbcSelectRunner {
     public static void main(String[] args) throws SQLException {
+        executeQueryAndInsertWithGeneratedKeys();
+        retrieveCourseById();
+    }
+
+    private static void retrieveCourseById() throws SQLException {
+        String sql = """
+                SELECT * 
+                FROM university_course.public.course WHERE course_id = ?
+                """;
+
+        try (var connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, 2); // Set parameter value
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String name = resultSet.getString("course_name");
+                Integer id = resultSet.getInt("course_id");
+                String description = resultSet.getString("course_description");
+                System.out.println("ID: " + id + " " + "\nNAME: " + name + "\nDescription: " + description);
+            }
+        } catch (SQLException error) { }
+    }
+
+    private static void executeQueryAndInsertWithGeneratedKeys() throws SQLException {
         String sql = """
                 SELECT *
                 FROM university_course.public.students
