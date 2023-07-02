@@ -11,9 +11,9 @@ import java.sql.SQLException;
  * @projectName JDBC_practice
  */
 public final class ConnectionManager {
-    private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "2016";
-    private static final String URL = "jdbc:postgresql://localhost:5432/university_course";
+    private static final String USERNAME_KEY = "db.username";
+    private static final String PASSWORD_KEY = "db.password";
+    private static final String URL_KEY = "db.url";
 
     // Load driver
     private static void loadDriver() {
@@ -28,7 +28,11 @@ public final class ConnectionManager {
 
     public static Connection getConnection() {
         try {
-            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            return DriverManager.getConnection(
+                    PropertiesUtil.getProperties(URL_KEY),
+                    PropertiesUtil.getProperties(USERNAME_KEY),
+                    PropertiesUtil.getProperties(PASSWORD_KEY)
+            );
         } catch (SQLException error) {
             throw new RuntimeException(error);
         }
