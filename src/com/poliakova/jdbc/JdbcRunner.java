@@ -22,6 +22,22 @@ public class JdbcRunner {
                  data TEXT NOT NULL
                 );
                  """;
+
+        String insertedValues = """
+                INSERT INTO info (data)
+                VALUES 
+                ('Test1'),
+                ('Test2'),
+                ('Test3'),
+                ('Test4');
+                """;
+
+        String testValue = """
+                UPDATE info
+                SET data = 'Test5'
+                WHERE id = 5;
+                """;
+
         try (var connection = ConnectionManager.getConnection();
              var statement = connection.createStatement()) {
             // Print the transaction isolation level of the connection
@@ -30,9 +46,16 @@ public class JdbcRunner {
             // Print the schema of the connection
             System.out.println(connection.getSchema());
 
-            // Execute the SQL statement
-            var executeResult = statement.execute(sql);
+            // Execute the SQL statements
+            var executeResult = statement.executeUpdate(sql);
             System.out.println(executeResult);
+
+            var executeResult1 = statement.executeUpdate(insertedValues);
+            System.out.println(insertedValues);
+
+            var executeResult2 = statement.executeUpdate(testValue);
+            System.out.println(executeResult2);
+
         }
     }
 }
