@@ -19,7 +19,7 @@ public class PreparedStatementRunner {
         String sql = """
                 SELECT *
                 FROM university_course.public.students
-                WHERE student_name LIKE ?\s
+                WHERE student_name LIKE ?\s AND student_email LIKE ?\s
                  """;
 
         try (var connection = ConnectionManager.getConnection()) {
@@ -28,6 +28,7 @@ public class PreparedStatementRunner {
 
             // set parameters
             statement.setString(1, "E%");
+            statement.setString(2, "%example.com");
 
             // execute query
             ResultSet resultSet = statement.executeQuery();
@@ -35,9 +36,11 @@ public class PreparedStatementRunner {
             // result usage
             while (resultSet.next()) {
                 String name = resultSet.getString("student_name");
-                System.out.println(name);
+                String email = resultSet.getString("student_email");
+                System.out.println(name + email);
             }
 
+            // close resources
             resultSet.close();
             statement.close();
             connection.close();

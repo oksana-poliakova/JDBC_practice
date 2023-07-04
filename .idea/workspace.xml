@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cefcdb0-9faf-4105-a4b5-a296ae19ba9c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/PreparedStatementRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/poliakova/jdbc/PreparedStatementRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/PreparedStatementRunner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +84,7 @@
       <updated>1688293865571</updated>
       <workItem from="1688293866693" duration="17349000" />
       <workItem from="1688391260972" duration="8000" />
-      <workItem from="1688391313149" duration="1560000" />
+      <workItem from="1688391313149" duration="2112000" />
     </task>
     <servers />
   </component>
