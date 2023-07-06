@@ -13,8 +13,9 @@ import java.sql.Statement;
  */
 public class JdbcSelectRunner {
     public static void main(String[] args) throws SQLException {
-        executeQueryAndInsertWithGeneratedKeys();
-        retrieveCourseById();
+//        executeQueryAndInsertWithGeneratedKeys();
+//        retrieveCourseById();
+        useFetchSize();
     }
 
     private static void retrieveCourseById() throws SQLException {
@@ -71,6 +72,30 @@ public class JdbcSelectRunner {
                 var generatedId = generatedKeys.getInt("id");
                 System.out.println(generatedId);
             }
+        }
+    }
+
+    private static void useFetchSize() throws SQLException {
+        String sql3 = """
+                SELECT * 
+                FROM students
+                """;
+
+        try (var connection = ConnectionManager.getConnection();
+             var statement = connection.createStatement()) {
+
+            statement.setFetchSize(3); // Set the fetch size to limit the number of rows fetched at a time
+            statement.setQueryTimeout(10); // Set the query timeout to 10 seconds
+            statement.setMaxRows(3); // Limit the maximum number of rows returned by the query
+
+            try (var resultSet = statement.executeQuery(sql3)) {
+                while (resultSet.next()) {
+                    String name = resultSet.getString("student_name");
+                    System.out.println(name);
+                }
+            }
+        } catch (SQLException e) {
+            // Exception handling
         }
     }
 }
