@@ -1,5 +1,6 @@
 package com.poliakova.jdbc.Dao;
 
+import com.poliakova.jdbc.Dto.TeacherFilter;
 import com.poliakova.jdbc.Exception.DaoException;
 import com.poliakova.jdbc.entity.Teachers;
 import com.poliakova.jdbc.util.ConnectionManager;
@@ -10,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Oksana Poliakova on 12.07.2023
@@ -120,6 +122,56 @@ public class TeachersDao {
         }
     }
 
+    // Select all teachers with filter
+    public List<Teachers> findAllTeachers(TeacherFilter filter) {
+        // Create lists to store parameters and WHERE conditions
+        List<Object> parameters = new ArrayList<>();
+        List<String> whereSql = new ArrayList<>();
+
+        // Check if teacherName filter is specified
+        if (filter.teacherName() != null) {
+            whereSql.add("teacher_name LIKE ?");
+            parameters.add(filter.teacherName());
+        }
+
+        // Check if teacherEmail filter is specified
+        if (filter.teacherEmail() != null) {
+            whereSql.add("teacher_email = ?");
+            parameters.add("%" + filter.teacherEmail() + "%");
+        }
+
+        // Add limit and offset parameters
+        parameters.add(filter.limit());
+        parameters.add(filter.offset());
+
+        // Generate the WHERE clause based on the filter conditions
+        var where = whereSql.stream()
+                .collect(Collectors.joining(" AND ", " WHERE ", " LIMIT ? OFFSET ? "));
+
+        // Combine the WHERE clause with the base SQL query
+        var sql = FIND_ALL_SQL + where;
+
+        try (var connection = ConnectionManager.get();
+             var preparedStatement = connection.prepareStatement(sql)) {
+            for (int i = 0; i < parameters.size(); i++) {
+                preparedStatement.setObject(i + 1, parameters.get(i));
+            }
+
+            // Execute the query and process the result set
+            final ResultSet resultSet = preparedStatement.executeQuery();
+            List<Teachers> teachers = new ArrayList<>();
+            while (resultSet.next()) {
+                teachers.add(buildTeacher(resultSet));
+            }
+            System.out.println(preparedStatement);
+            
+            // Return the list of Teachers objects
+            return teachers;
+        } catch (SQLException throwables) {
+            throw new DaoException(throwables);
+        }
+    }
+
     // Select a teacher by id
     public Optional<Teachers> findById(Integer teachersId) {
         try (var connection = ConnectionManager.get();
@@ -140,6 +192,7 @@ public class TeachersDao {
         }
     }
 
+    // Build teacher
     private static Teachers buildTeacher(ResultSet resultSet) throws SQLException {
         return new Teachers(
                 resultSet.getInt("teacher_id"),

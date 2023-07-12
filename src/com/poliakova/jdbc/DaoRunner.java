@@ -1,6 +1,7 @@
 package com.poliakova.jdbc;
 
 import com.poliakova.jdbc.Dao.TeachersDao;
+import com.poliakova.jdbc.Dto.TeacherFilter;
 import com.poliakova.jdbc.entity.Teachers;
 
 /**
@@ -9,10 +10,12 @@ import com.poliakova.jdbc.entity.Teachers;
  */
 public class DaoRunner {
     public static void main(String[] args) {
+        var teacherFilter = new TeacherFilter(1, 0, "Emma Schmidt", null);
 //        saveTest();
 //        deleteTest();
 //        findByIdTest();
-        findAllTeachers();
+//        findAllTeachers();
+        findAllTeachers(teacherFilter);
     }
 
     // Test method for deleting a teacher
@@ -48,7 +51,7 @@ public class DaoRunner {
     }
 
     // Test method for selecting all teachers
-    private static void findAllTeachers() {
+    private static void findAllTeachers(TeacherFilter teacherFilter) {
         var teachers = TeachersDao.getInstance().findAllTeachers();
         System.out.println(teachers);
     }
