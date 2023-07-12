@@ -18,7 +18,7 @@ public class DatabaseMetaDataRunner {
     }
 
     private static void checkMetaData() throws SQLException {
-        try (var connection = ConnectionManager.getConnection()) {
+        try (var connection = ConnectionManager.get()) {
             String sql = """
                     SELECT *
                     FROM students

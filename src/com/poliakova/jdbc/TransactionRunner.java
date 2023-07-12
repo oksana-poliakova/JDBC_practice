@@ -22,7 +22,7 @@ public class TransactionRunner {
         PreparedStatement deleteStudentStatement = null;
         PreparedStatement deleteGradeStatement = null;
         try {
-            connection = ConnectionManager.getConnection(); // Get a database connection
+            connection = ConnectionManager.get(); // Get a database connection
             // Prepare the delete student and grade statements
             deleteStudentStatement = connection.prepareStatement(deleteStudentSql);
             deleteGradeStatement = connection.prepareStatement(deleteGradeSql);

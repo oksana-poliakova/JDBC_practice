@@ -38,7 +38,7 @@ public class JdbcRunner {
                 WHERE id = 5;
                 """;
 
-        try (var connection = ConnectionManager.getConnection();
+        try (var connection = ConnectionManager.get();
              var statement = connection.createStatement()) {
             // Print the transaction isolation level of the connection
             System.out.println(connection.getTransactionIsolation());
