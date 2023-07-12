@@ -8,7 +8,7 @@ import com.poliakova.jdbc.entity.Teachers;
  * @author Oksana Poliakova on 12.07.2023
  * @projectName JDBC_practice
  */
-public class DaoRunner {
+public class TeacherDaoRunner {
     public static void main(String[] args) {
         var teacherFilter = new TeacherFilter(1, 0, "Emma Schmidt", null);
 //        saveTest();

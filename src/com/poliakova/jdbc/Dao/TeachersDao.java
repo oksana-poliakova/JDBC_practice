@@ -164,7 +164,7 @@ public class TeachersDao {
                 teachers.add(buildTeacher(resultSet));
             }
             System.out.println(preparedStatement);
-            
+
             // Return the list of Teachers objects
             return teachers;
         } catch (SQLException throwables) {
