@@ -4,15 +4,19 @@ package com.poliakova.jdbc.entity;
  * @author Oksana Poliakova on 12.07.2023
  * @projectName JDBC_practice
  */
-public class TeachersEntity {
+public class Teachers {
     private Integer teacherId;
     private String teacherName;
     private String teacherEmail;
 
-    public TeachersEntity(Integer teacherId, String teacherName, String teacherEmail) {
+    public Teachers(Integer teacherId, String teacherName, String teacherEmail) {
         this.teacherId = teacherId;
         this.teacherName = teacherName;
         this.teacherEmail = teacherEmail;
+    }
+
+    public Teachers() {
+
     }
 
     public Integer getTeacherId() {
