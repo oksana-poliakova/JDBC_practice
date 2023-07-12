@@ -2,8 +2,11 @@ package com.poliakova.jdbc;
 
 import com.poliakova.jdbc.Dao.CourseDao;
 import com.poliakova.jdbc.Dao.TeachersDao;
+import com.poliakova.jdbc.Dto.CourseFilter;
 import com.poliakova.jdbc.Dto.TeacherFilter;
 import com.poliakova.jdbc.entity.Course;
+
+import java.util.List;
 
 /**
  * @author Oksana Poliakova on 12.07.2023
@@ -12,12 +15,14 @@ import com.poliakova.jdbc.entity.Course;
 public class CourseDaoRunner {
     public static void main(String[] args) {
         // Test method to retrieve all courses
-        findAllCoursesTest();
+//        findAllCoursesTest();
 
         System.out.println("Next query =====>");
 
         // Test method to find a course by ID
-        findCourseByIdTest();
+//        findCourseByIdTest();
+
+        testFindCourseByFilter();
     }
 
     private static void findAllCoursesTest() {
@@ -48,5 +53,20 @@ public class CourseDaoRunner {
                 course -> System.out.println("Course found: " + course),
                 () -> System.out.println("Course not found.")
         );
+    }
+
+    // Find course by filter
+    private static void testFindCourseByFilter() {
+        CourseFilter filter = new CourseFilter(10, 0, "JavaScript", null);
+        List<Course> courses = CourseDao.getInstance().findAllCourses(filter);
+
+        if (courses.isEmpty()) {
+            System.out.println("No courses found.");
+        } else {
+            System.out.println("Courses found:");
+            for (Course course : courses) {
+                System.out.println(course);
+            }
+        }
     }
 }
