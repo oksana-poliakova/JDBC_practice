@@ -30,7 +30,7 @@ public class BatchQueryRunner {
         PreparedStatement deleteStudentStatement = null;
 
         try {
-            connection = ConnectionManager.getConnection();
+            connection = ConnectionManager.get();
             deleteStudentStatement = connection.prepareStatement(deleteStudentSql);
 
             connection.setAutoCommit(false); // Disable auto-commit

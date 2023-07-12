@@ -26,7 +26,7 @@ public class BlobRunner {
                 FROM students
                 WHERE student_id = ?
                 """;
-        try (var connection = ConnectionManager.getConnection();
+        try (var connection = ConnectionManager.get();
              var preraredStatement = connection.prepareStatement(sql)) {
             preraredStatement.setInt(1, 3);
             var resultSet = preraredStatement.executeQuery();
@@ -45,7 +45,7 @@ public class BlobRunner {
                 WHERE student_id = 3
                 """;
 
-        try (var connection = ConnectionManager.getConnection();
+        try (var connection = ConnectionManager.get();
              var preraredStatement = connection.prepareStatement(sql)) {
             preraredStatement.setBytes(1, Files.readAllBytes(Path.of("resources", "picture1.png")));
             preraredStatement.executeUpdate();

@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cefcdb0-9faf-4105-a4b5-a296ae19ba9c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/picture1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/BlobRunner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/poliakova/jdbc/BatchQueryRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/BatchQueryRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/poliakova/jdbc/BlobRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/BlobRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/poliakova/jdbc/DatabaseMetaDataRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/DatabaseMetaDataRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/poliakova/jdbc/JdbcRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/JdbcRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/poliakova/jdbc/JdbcSelectRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/JdbcSelectRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/poliakova/jdbc/PreparedStatementRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/PreparedStatementRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/poliakova/jdbc/TransactionRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/TransactionRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/poliakova/jdbc/util/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/util/ConnectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/poliakova/jdbc/util/PropertiesUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/poliakova/jdbc/util/PropertiesUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +96,7 @@
       <workItem from="1688293866693" duration="17349000" />
       <workItem from="1688391260972" duration="8000" />
       <workItem from="1688391313149" duration="8575000" />
-      <workItem from="1688724153170" duration="2631000" />
+      <workItem from="1688724153170" duration="4390000" />
     </task>
     <servers />
   </component>

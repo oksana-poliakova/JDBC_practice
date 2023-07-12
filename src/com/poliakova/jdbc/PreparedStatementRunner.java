@@ -22,7 +22,7 @@ public class PreparedStatementRunner {
                 WHERE student_name LIKE ?\s AND student_email LIKE ?\s
                  """;
 
-        try (var connection = ConnectionManager.getConnection()) {
+        try (var connection = ConnectionManager.get()) {
             // create prepare statement
             PreparedStatement statement = connection.prepareStatement(sql);
 
