@@ -9,8 +9,10 @@ import com.poliakova.jdbc.entity.Teachers;
  */
 public class DaoRunner {
     public static void main(String[] args) {
-        saveTest();
+//        saveTest();
 //        deleteTest();
+//        findByIdTest();
+        findAllTeachers();
     }
 
     // Test method for deleting a teacher
@@ -31,5 +33,23 @@ public class DaoRunner {
 
         var savedTeacher = teacherDao.save(teacher);
         System.out.println(savedTeacher);
+    }
+
+    // Test method for selecting a teacher by id
+    private static void findByIdTest() {
+        var teacherDao = TeachersDao.getInstance();
+        var maybeTeacher = teacherDao.findById(1);
+        System.out.println(maybeTeacher);
+
+        maybeTeacher.ifPresent(teachers -> {
+            teachers.setTeacherName("Updated name for Hans Müller");
+            teacherDao.update(teachers);
+        });
+    }
+
+    // Test method for selecting all teachers
+    private static void findAllTeachers() {
+        var teachers = TeachersDao.getInstance().findAllTeachers();
+        System.out.println(teachers);
     }
 }

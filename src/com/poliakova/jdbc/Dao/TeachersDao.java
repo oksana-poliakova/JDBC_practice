@@ -4,8 +4,12 @@ import com.poliakova.jdbc.Exception.DaoException;
 import com.poliakova.jdbc.entity.Teachers;
 import com.poliakova.jdbc.util.ConnectionManager;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Oksana Poliakova on 12.07.2023
@@ -58,6 +62,90 @@ public class TeachersDao {
         } catch (SQLException throwables) {
             throw new DaoException(throwables);
         }
+    }
+
+    // UPDATE
+    public static final String UPDATE_SQL = """
+            UPDATE teachers
+            SET
+                teacher_name = ?,
+                teacher_email = ?
+            WHERE teacher_id = ?;
+            """;
+
+    // Update a teacher
+    public void update(Teachers teachers) {
+        try (var connection = ConnectionManager.get();
+             var preparedStatement = connection.prepareStatement(UPDATE_SQL)) {
+            preparedStatement.setString(1, teachers.getTeacherName());
+            preparedStatement.setString(2, teachers.getTeacherEmail());
+            preparedStatement.setInt(3, teachers.getTeacherId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throw new DaoException(throwables);
+        }
+    }
+
+    // SELECT
+
+    // SELECT ALL TEACHERS
+    public static final String FIND_ALL_SQL = """
+            SELECT  teacher_id, 
+                    teacher_name, 
+                    teacher_email
+            FROM teachers
+            """;
+
+    public static final String FIND_BY_ID_SQL = FIND_ALL_SQL + """
+          
+            WHERE teacher_id = ?
+            """;
+
+    // Select all teachers
+    public List<Teachers> findAllTeachers() {
+        try (var connection = ConnectionManager.get();
+             var preparedStatement = connection.prepareStatement(FIND_ALL_SQL)) {
+            var resultSet = preparedStatement.executeQuery();
+            List<Teachers> teachers = new ArrayList<>();
+
+            // Iterate over the result set and build Teachers objects
+            while (resultSet.next()) {
+                teachers.add(buildTeacher(resultSet));
+            }
+            // Return the list of Teachers objects
+            return teachers;
+        } catch (SQLException throwables) {
+            throw new DaoException(throwables);
+        }
+    }
+
+    // Select a teacher by id
+    public Optional<Teachers> findById(Integer teachersId) {
+        try (var connection = ConnectionManager.get();
+             var preparedStatement = connection.prepareStatement(FIND_BY_ID_SQL)) {
+            preparedStatement.setInt(1, teachersId);
+
+            var resultSet = preparedStatement.executeQuery();
+            Teachers teachers = null;
+
+            // Check if a teacher was found in the result set
+            if (resultSet.next()) {
+                teachers = buildTeacher(resultSet);
+            }
+            // Return an Optional object containing the Teachers object (or null if not found)
+            return Optional.ofNullable(teachers);
+        } catch (SQLException throwables) {
+            throw new DaoException(throwables);
+        }
+    }
+
+    private static Teachers buildTeacher(ResultSet resultSet) throws SQLException {
+        return new Teachers(
+                resultSet.getInt("teacher_id"),
+                resultSet.getString("teacher_name"),
+                resultSet.getString("teacher_email")
+        );
     }
 
     // Get the singleton instance
