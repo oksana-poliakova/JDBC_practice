@@ -109,7 +109,7 @@ public final class ConnectionManager {
             throw new RuntimeException(error);
         }
     }
-    
+
     // Prevent instantiation of the class
     private ConnectionManager() { }
 }
